@@ -1,6 +1,10 @@
 "use server"
 
+import { Resend } from "resend";
 import { createClient } from "../utils/supabase/server"
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 export async function submitLMK(formData:FormData){
     const supabase = await createClient();
@@ -16,6 +20,24 @@ export async function submitLMK(formData:FormData){
     }]);
 
     console.log(data,'data_submitLMK')
+
+    try{
+        await resend.emails.send({
+            from: 'LMK <onboarding@resend.dev>',
+            to: 'mk@kangmin.kr',
+            subject: 'LetMeKnow 행사에 초대합니다.',
+            html: `
+            <h1>New LMK 행사 초대 확인</h1>
+            <p><strong>성명:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>참석자:</strong> ${accompany}</p>
+            <p><strong>참석여부:</strong> ${attendance}</p>
+            `,
+        })
+    }catch(error){
+        console.log('Error resend email: ',error)
+    }
+
 
     if(error){
         console.log('Error inserting lmks:' ,error)
