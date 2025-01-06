@@ -60,6 +60,11 @@ export default function LMKForm() {
                 variant: "destructive"
             });
             //해야할 것 : email이 이미 등록되었을경우 작성
+            if(response.error){
+                if(response.error.code ==='23505'){
+                    setErrors({email:'Email이 이미 존재함'})
+                }
+            }
         }
 
         setIsLoading(false)

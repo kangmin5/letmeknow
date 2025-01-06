@@ -15,5 +15,5 @@ export const strings = {
     thankYouMessage: "내용 작성에 감사합니다!",
     viewOnMapButton: "네이버 지도로 보기",
     sendFromEmail: "onboarding@resend.dev",
-    sendToEmail: process.env.EMAIL_TO,
+    sendToEmail: process.env.EMAIL_TO, 
 }
