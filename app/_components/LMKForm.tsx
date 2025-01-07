@@ -24,7 +24,7 @@ export default function LMKForm() {
     const handleSubmit = async (e: React.FormEvent) =>{
         e.preventDefault();
         if(!name){
-            setErrors({name:"성명이 필수입력력입니다."})
+            setErrors({name:"성명이 필수입력입니다."})
             return
         }
         if(!email){
